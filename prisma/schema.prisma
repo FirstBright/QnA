@@ -1,0 +1,47 @@
+generator client {
+  provider = "prisma-client-js"
+}
+
+datasource db {
+  provider = "mysql"
+  url      = env("DATABASE_URL")
+}
+
+model Question {
+  idx       Int      @id @default(autoincrement())
+  title     String   @db.VarChar(100)
+  content   String   @db.Text
+  likes      Int      @db.Int
+  authorIdx Int
+  createdAt DateTime @default(now())
+  updatedAt DateTime @default(now()) @updatedAt
+
+  author User     @relation(fields: [authorIdx], references: [idx])
+  Answer Answer[]
+}
+
+model Answer {
+  idx         Int      @id @default(autoincrement())
+  content     String   @db.Text
+  likes       Int      @db.Int
+  questionIdx Int
+  authorIdx   Int
+  createdAt    DateTime @default(now())
+  updatedAt   DateTime @default(now()) @updatedAt
+
+  author   User     @relation(fields: [authorIdx], references: [idx])
+  question Question @relation(fields: [questionIdx], references: [idx])
+}
+
+model User {
+  idx       Int      @id @default(autoincrement())
+  email     String   @db.VarChar(100)
+  password  String   @db.VarChar(30)
+  name      String   @db.VarChar(100)
+  phone     String   @db.VarChar(100)
+  createdAt DateTime @default(now())
+  updatedAt DateTime @default(now()) @updatedAt
+
+  questions Question[]
+  Answer    Answer[]
+}

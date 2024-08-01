@@ -1,0 +1,41 @@
+-- CreateTable
+CREATE TABLE `Question` (
+    `idx` INTEGER NOT NULL AUTO_INCREMENT,
+    `title` VARCHAR(100) NOT NULL,
+    `content` TEXT NOT NULL,
+    `like` INTEGER NOT NULL,
+    `authorIdx` INTEGER NOT NULL,
+    `createdAt` DATETIME(3) NOT NULL DEFAULT CURRENT_TIMESTAMP(3),
+    `updatedAt` DATETIME(3) NOT NULL DEFAULT CURRENT_TIMESTAMP(3),
+
+    PRIMARY KEY (`idx`)
+) DEFAULT CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci;
+
+-- CreateTable
+CREATE TABLE `Answer` (
+    `idx` INTEGER NOT NULL AUTO_INCREMENT,
+    `content` TEXT NOT NULL,
+    `like` INTEGER NOT NULL,
+    `questionIdx` INTEGER NOT NULL,
+    `authorIdx` INTEGER NOT NULL,
+    `createAt` DATETIME(3) NOT NULL DEFAULT CURRENT_TIMESTAMP(3),
+    `updatedAt` DATETIME(3) NOT NULL DEFAULT CURRENT_TIMESTAMP(3),
+
+    PRIMARY KEY (`idx`)
+) DEFAULT CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci;
+
+-- CreateTable
+CREATE TABLE `User` (
+    `idx` INTEGER NOT NULL AUTO_INCREMENT,
+    `email` VARCHAR(100) NOT NULL,
+    `password` VARCHAR(30) NOT NULL,
+    `name` VARCHAR(100) NOT NULL,
+    `phone` VARCHAR(100) NULL,
+    `createdAt` DATETIME(3) NOT NULL DEFAULT CURRENT_TIMESTAMP(3),
+    `updatedAt` DATETIME(3) NOT NULL DEFAULT CURRENT_TIMESTAMP(3),
+
+    PRIMARY KEY (`idx`)
+) DEFAULT CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci;
+
+-- AddForeignKey
+ALTER TABLE `Question` ADD CONSTRAINT `Question_authorIdx_fkey` FOREIGN KEY (`authorIdx`) REFERENCES `User`(`idx`) ON DELETE RESTRICT ON UPDATE CASCADE;
