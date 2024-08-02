@@ -36,6 +36,7 @@ export const postQuestion = async (data: ICreateQuestion) => {
 
 export const deleteQuestion = async (idx: number) => {
     const haveAnswer = await findAnswersFromQuestion(idx)
+    console.log("🚀 ~ deleteQuestion ~ haveAnswer:", haveAnswer)
     if (haveAnswer !== null) {
         await deleteAnswersFromQuestion(idx)
     }

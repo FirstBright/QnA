@@ -1,4 +1,5 @@
-// src/services/userService.ts
+import { deleteAnswersByUserIdx } from "@/dao/answerDao"
+import { deleteQuestionsByUserIdx } from "@/dao/questionDao"
 import {
     createUser,
     deleteUserByIdx,
@@ -38,6 +39,8 @@ export const postUser = async (data: ICreateUser) => {
 }
 
 export const deleteUser = async (idx: number) => {
+    await deleteAnswersByUserIdx(idx)
+    await deleteQuestionsByUserIdx(idx)
     return await deleteUserByIdx(idx)
 }
 export const updateUser = async (idx: number, data: IUpdateUser) => {

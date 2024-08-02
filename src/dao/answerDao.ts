@@ -32,6 +32,11 @@ export const deleteAnswerByIdx = async (idx: number) => {
     })
 }
 
+export const deleteAnswersByUserIdx = async (idx: number) => {
+    return await prisma.answer.deleteMany({
+        where: { authorIdx: idx },
+    })
+}
 export const updateAnswerByIdx = async (idx: number, content: string) => {
     return await prisma.answer.update({
         where: { idx: idx },
