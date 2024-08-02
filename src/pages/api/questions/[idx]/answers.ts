@@ -21,7 +21,6 @@ const handler = async (req: NextApiRequest, res: NextApiResponse) => {
             case "GET":
                 const question = await findAnswersFromQuestion(numIdx)
                 return res.status(200).json({ question })
-
             case "POST":
                 const { content, authorIdx } = req.body
                 if (content === undefined || authorIdx === undefined) {

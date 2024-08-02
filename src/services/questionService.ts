@@ -36,8 +36,7 @@ export const postQuestion = async (data: ICreateQuestion) => {
 
 export const deleteQuestion = async (idx: number) => {
     const haveAnswer = await findAnswersFromQuestion(idx)
-    console.log("🚀 ~ deleteQuestion ~ haveAnswer:", haveAnswer)
-    if (haveAnswer !== null) {
+    if (haveAnswer.length !== 0) {
         await deleteAnswersFromQuestion(idx)
     }
     return await deleteQuestionByIdx(idx)
@@ -45,7 +44,7 @@ export const deleteQuestion = async (idx: number) => {
 
 export const updateQuestion = async (idx: number, data: IUpdateQuestion) => {
     const haveAnswer = await findAnswersFromQuestion(idx)
-    if (haveAnswer !== null) {
+    if (haveAnswer.length !== 0) {
         throw new Error("답변이 있어, 수정할 수 없습니다.")
     }
     return await updateQuestionByIdx(idx, data)
