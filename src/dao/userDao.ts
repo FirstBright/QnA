@@ -1,9 +1,8 @@
-// src/dao/userDao.ts
 import { PrismaClient } from "@prisma/client"
 
 const prisma = new PrismaClient()
 
-export const findUserById = async (idx: number) => {
+export const findUserByIdx = async (idx: number) => {
     return await prisma.user.findUnique({
         where: { idx: idx },
     })
@@ -20,17 +19,19 @@ export const createUser = async (data: {
     password: string
 }) => {
     return await prisma.user.create({
-        data,
+        data: {
+            ...data,
+        },
     })
 }
 
-export const deleteUserById = async (idx: number) => {
+export const deleteUserByIdx = async (idx: number) => {
     return await prisma.user.delete({
         where: { idx: idx },
     })
 }
 
-export const updateUserById = async (
+export const updateUserByIdx = async (
     idx: number,
     data: {
         name?: string
@@ -44,5 +45,3 @@ export const updateUserById = async (
         },
     })
 }
-
-// Add other data access methods as needed

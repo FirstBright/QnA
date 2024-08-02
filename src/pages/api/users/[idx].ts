@@ -1,6 +1,6 @@
 // src/apis/users/[id].ts
 import { NextApiRequest, NextApiResponse } from "next"
-import { getUserById } from "@/services/userService"
+import { getUserByIdx } from "@/services/userService"
 import { deleteUser } from "@/services/userService"
 import { updateUser } from "@/services/userService"
 
@@ -13,7 +13,7 @@ const handler = async (req: NextApiRequest, res: NextApiResponse) => {
         isNaN(parseInt(idxStr, 10)) ||
         parseInt(idxStr, 10).toString() !== idxStr
     ) {
-        return res.status(400).json({ status: "Invalid id" })
+        return res.status(400).json({ status: "Invalid idx" })
     }
 
     const numIdx = parseInt(idxStr, 10)
@@ -21,7 +21,7 @@ const handler = async (req: NextApiRequest, res: NextApiResponse) => {
     try {
         switch (req.method) {
             case "GET":
-                const user = await getUserById(numIdx)
+                const user = await getUserByIdx(numIdx)
                 return res.status(200).json({ user })
             case "DELETE":
                 const deletedUser = await deleteUser(numIdx)

@@ -1,6 +1,6 @@
 // src/apis/users/index.ts
 import { NextApiRequest, NextApiResponse } from "next"
-import { getAllUsers, createUser } from "@/services/userService"
+import { getAllUsers, postUser } from "@/services/userService"
 
 const handler = async (req: NextApiRequest, res: NextApiResponse) => {
     try {
@@ -16,14 +16,14 @@ const handler = async (req: NextApiRequest, res: NextApiResponse) => {
                         .status(400)
                         .json({ status: "이메일과 이름은 필수입니다." })
                 }
-                
-                const createdUser = await createUser({
+
+                const postedUser = await postUser({
                     email,
                     name,
                     password,
                     phone,
                 })
-                return res.status(201).json({ createdUser })
+                return res.status(201).json({ postedUser })
             default:
                 res.setHeader("Allow", ["GET", "POST"])
                 return res
