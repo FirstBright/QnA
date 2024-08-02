@@ -12,7 +12,7 @@ model Question {
   title     String   @db.VarChar(100)
   content   String   @db.Text
   likes      Int      @db.Int
-  authorIdx Int
+  authorIdx Int       @db.Int
   createdAt DateTime @default(now())
   updatedAt DateTime @default(now()) @updatedAt
 
@@ -24,8 +24,8 @@ model Answer {
   idx         Int      @id @default(autoincrement())
   content     String   @db.Text
   likes       Int      @db.Int
-  questionIdx Int
-  authorIdx   Int
+  questionIdx Int      @db.Int
+  authorIdx   Int      @db.Int
   createdAt    DateTime @default(now())
   updatedAt   DateTime @default(now()) @updatedAt
 

@@ -45,3 +45,14 @@ export const updateQuestionByIdx = async (
         },
     })
 }
+
+export const likeQuestionByIdx = async (idx: number) => {
+    return await prisma.question.update({
+        where: { idx: idx },
+        data: {
+            likes: {
+                increment: 1,
+            },
+        },
+    })
+}

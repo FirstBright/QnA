@@ -1,4 +1,3 @@
-// src/apis/users/index.ts
 import { getAllQuestions, postQuestion } from "@/services/questionService"
 import { NextApiRequest, NextApiResponse } from "next"
 
@@ -29,8 +28,11 @@ const handler = async (req: NextApiRequest, res: NextApiResponse) => {
                     .status(405)
                     .end(`${req.method} 지원하지 않는 매서드 입니다.`)
         }
-    } catch (e) {
-        return res.status(400).json({ status: "서비스 문제 입니다." })
+    } catch (error: unknown) {
+        if (error instanceof Error) {
+            return res.status(400).json({ status: error.message })
+        }
+        return res.status(400).json({ status: "Unknown error occurred." })
     }
 }
 
