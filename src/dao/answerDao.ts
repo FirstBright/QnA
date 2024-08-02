@@ -2,12 +2,12 @@ import { PrismaClient } from "@prisma/client"
 
 const prisma = new PrismaClient()
 
-export const findAnswerFromQuestion = async (idx: number) => {
+export const findAnswersFromQuestion = async (idx: number) => {
     return await prisma.answer.findMany({
         where: { questionIdx: idx },
     })
 }
-export const deleteAnswerFromQuestion = async (idx: number) => {
+export const deleteAnswersFromQuestion = async (idx: number) => {
     return await prisma.answer.deleteMany({
         where: { questionIdx: idx },
     })

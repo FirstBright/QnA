@@ -7,8 +7,8 @@ import {
 } from "@/dao/questionDao"
 import { createQuestion } from "./../dao/questionDao"
 import {
-    deleteAnswerFromQuestion,
-    findAnswerFromQuestion,
+    deleteAnswersFromQuestion,
+    findAnswersFromQuestion,
 } from "@/dao/answerDao"
 
 interface ICreateQuestion {
@@ -35,15 +35,15 @@ export const postQuestion = async (data: ICreateQuestion) => {
 }
 
 export const deleteQuestion = async (idx: number) => {
-    const haveAnswer = await findAnswerFromQuestion(idx)
+    const haveAnswer = await findAnswersFromQuestion(idx)
     if (haveAnswer !== null) {
-        await deleteAnswerFromQuestion(idx)
+        await deleteAnswersFromQuestion(idx)
     }
     return await deleteQuestionByIdx(idx)
 }
 
 export const updateQuestion = async (idx: number, data: IUpdateQuestion) => {
-    const haveAnswer = await findAnswerFromQuestion(idx)
+    const haveAnswer = await findAnswersFromQuestion(idx)
     if (haveAnswer !== null) {
         throw new Error("답변이 있어, 수정할 수 없습니다.")
     }
