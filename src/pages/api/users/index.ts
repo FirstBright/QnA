@@ -10,8 +10,9 @@ const handler = async (req: NextApiRequest, res: NextApiResponse) => {
                 return res.status(200).json({ users })
             case "POST":
                 // Basic validation before passing to service layer
-                const { email, password, name, phone } = req.body
-                if (email === null || name === null) {
+                const { email, password, name, phone } = req.body                
+
+                if (email === undefined || name === undefined) {
                     return res
                         .status(400)
                         .json({ status: "이메일과 이름은 필수입니다." })

@@ -10,7 +10,7 @@ const handler = async (req: NextApiRequest, res: NextApiResponse) => {
             case "POST":
                 // Basic validation before passing to service layer
                 const { title, authorIdx, content } = req.body
-                if (title === null && content === null) {
+                if (title === undefined && content === undefined) {
                     return res
                         .status(400)
                         .json({ status: "제목과 글은 필수입니다." })

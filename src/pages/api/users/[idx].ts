@@ -28,7 +28,7 @@ const handler = async (req: NextApiRequest, res: NextApiResponse) => {
                 return res.status(200).json({ deletedUser })
             case "PUT":
                 const { name, phone } = req.body
-                if (name === null && phone === null) {
+                if (name === undefined && phone === undefined) {
                     return res
                         .status(404)
                         .json({ status: "업데이트 정보가 없습니다." })

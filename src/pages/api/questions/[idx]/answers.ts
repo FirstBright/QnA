@@ -24,7 +24,7 @@ const handler = async (req: NextApiRequest, res: NextApiResponse) => {
 
             case "POST":
                 const { content, authorIdx } = req.body
-                if (content === null || authorIdx === null) {
+                if (content === undefined || authorIdx === undefined) {
                     return res
                         .status(404)
                         .json({ status: "업데이트 정보가 없습니다." })
