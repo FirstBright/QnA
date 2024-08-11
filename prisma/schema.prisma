@@ -35,11 +35,10 @@ model Answer {
   @@index([authorIdx], map: "Answer_authorIdx_fkey")
   @@index([questionIdx], map: "Answer_questionIdx_fkey")
 }
-
 model User {
   idx       Int        @id @default(autoincrement())
   email     String     @db.VarChar(100)
-  password  String     @db.VarChar(30)
+  password  String     @db.VarChar(100)
   name      String     @db.VarChar(100)
   phone     String     @db.VarChar(100)
   createdAt DateTime   @default(now())
